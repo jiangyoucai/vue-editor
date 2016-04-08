@@ -44,7 +44,7 @@ import layout from '../../components/Layout'
 import editor from '../../components/Editor'
 Vue.use(VueResource)
 Vue.use(VueRouter)
-var router = new VueRouter()
+let router = new VueRouter()
 export default {
     data: function() {
         return {
@@ -59,9 +59,13 @@ export default {
         },
         account: function() {
             return store.state.account
+        },
+        newsContent: function() {
+            return store.state.newsContent
         }
     },
     methods: {
+        // 资讯详情
         newsDetail: function() {
             let data = {
                 url: this.url + '?token=' + this.account.token,
@@ -69,22 +73,52 @@ export default {
             }
             this.requestData('newsDetail', data)
         },
+        // 资讯发布
         newsPublish: function() {
-            if (this.result.name === undefined || editor.$txt.text() === '') {
-                console.log('提交空数据')
-            } else {
-                let content = editor.$txt.html()
-                content = content.replace(/&nbsp;/ig, '')
-                content = content.replace(/'<p><\/p>'/ig, '')
-                content = this.ReplaceLoadingImage('save', content)
-                this.result.content = content
-                this.result.thumb = $(editor.$txt.find('img')[0]).attr('src')
+            if (this.newsCheck()) {
+                this.newsFormat()
                 let data = {
                     url: this.url + '?token=' + this.account.token,
                     method: this.method,
                     data: this.result
                 }
                 this.requestData('newsPublish', data)
+            } else {
+                console.log('提交空数据')
+            }
+        },
+        // 资讯检查
+        newsCheck: function() {
+            if (this.result.name === undefined || this.newsContent === '    <p><br></p>') {
+                return false
+            }
+            return true
+        },
+        // 资讯处理
+        newsFormat: function() {
+            // 处理内容
+            let content = this.newsContent
+            content = content.replace(/&nbsp;/ig, '')
+            content = content.replace(/'<p><\/p>'/ig, '')
+            content = this.ReplaceLoadingImage('save', content)
+            this.result.content = content
+                // 处理图片
+            this.newsThumb()
+        },
+        // 资讯图片
+        newsThumb: function() {
+            // 匹配image
+            let regImage = /<img.*?(?:>|\/>)/gi
+                // 匹配src
+            let regSrc = /src=[\'\"]?([^\'\"]*)[\'\"]?/i
+            let imageList = this.newsContent.match(regImage)
+            if (imageList[0]) {
+                let imageSrc = imageList[0].match(regSrc)
+                if (imageSrc[1]) {
+                    this.result.thumb = imageSrc[1]
+                }
+            } else {
+                this.result.thumb = ''
             }
         },
         // 请求数据
@@ -93,7 +127,7 @@ export default {
                 if (response.data.status === '200') {
                     this.responseComply(method, response.data.result)
                 } else {
-                    var message = response.data.message
+                    let message = response.data.message
                     if (message === '用户未登录') {
                         router.go({
                             path: '/account'
@@ -112,6 +146,7 @@ export default {
                 case 'newsDetail':
                     result.content = this.ReplaceLoadingImage('show', result.content)
                     this.result = result
+                        // 派发内容到store
                     store.dispatch('newsContent', result.content)
                     break
                 case 'newsPublish':
@@ -124,11 +159,11 @@ export default {
         // 替换懒加载图片
         ReplaceLoadingImage: function(action, data) {
             if (action === 'save') {
-                let temp = new RegExp('src', 'g')
-                return data.replace(temp, 'src="/media/img/loading.gif" data-echo')
+                let temp = new RegExp('src=', 'g')
+                return data.replace(temp, 'src="/media/img/loading.gif" data-echo=')
             } else if (action === 'show') {
-                let temp = new RegExp('src="/media/img/loading.gif" data-echo', 'g')
-                return data.replace(temp, 'src')
+                let temp = new RegExp('src="/media/img/loading.gif" data-echo=', 'g')
+                return data.replace(temp, 'src=')
             }
         }
     },
@@ -137,7 +172,7 @@ export default {
         'app-editor': editor
     },
     ready: function() {
-        var requestID = this.$route.params['number']
+        let requestID = this.$route.params['number']
         if (requestID !== undefined) {
             // 编辑
             this.method = 'put'

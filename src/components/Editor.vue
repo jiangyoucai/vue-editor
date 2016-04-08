@@ -12,8 +12,9 @@
 
 <template id="">
 
-<div id="editor">
-</div>
+<textarea id="editor" name="name" rows="8" cols="40">
+    {{newsContent}}
+</textarea>
 
 </template>
 
@@ -32,50 +33,26 @@ export default {
         }
     },
     watch: {
+        // 监控newsContent,变化后更新编辑器内容
         'newsContent': function() {
             editor.$txt.html(this.newsContent)
         }
     },
     ready: function() {
+        // 初始化
         editor = new WangEditor('editor')
-        editor.config.printLog = false
-        editor.config.menus = [
-            'source',
-            '|',
-            'bold',
-            'underline',
-            'italic',
-            'strikethrough',
-            'eraser',
-            'forecolor',
-            'bgcolor',
-            '|',
-            'quote',
-            'fontfamily',
-            'fontsize',
-            'head',
-            'unorderlist',
-            'orderlist',
-            'alignleft',
-            'aligncenter',
-            'alignright',
-            '|',
-            'link',
-            'unlink',
-            'table',
-            'emotion',
-            // '|',
-            'img',
-            'video',
-            // 'location',
-            'insertcode',
-            '|',
-            'undo',
-            'redo',
-            'fullscreen'
-        ]
+            // 菜单
+        editor.config.menus = ['source', '|', 'bold', 'underline', 'italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|', 'quote', 'fontfamily', 'fontsize', 'head', 'unorderlist', 'orderlist', 'alignleft', 'aligncenter', 'alignright', '|', 'link', 'unlink', 'table', 'emotion', 'img', 'video', 'insertcode', '|', 'undo', 'redo', 'fullscreen']
+            // 图片
         editor.config.uploadImgUrl = this.host + '/help/upload/wangEditorH5File'
+            // 创建
         editor.create()
+            // 自定义方法，编辑器失去焦点，派发内容到store
+        editor.$txt.on('focusout', function() {
+            setTimeout(function() {
+                store.dispatch('newsContent', editor.$txt.html())
+            }, 0)
+        })
     }
 }
 
