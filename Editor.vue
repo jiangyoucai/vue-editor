@@ -1,21 +1,22 @@
 <template lang="html">
-    <div id="editor">
-        {{{inputContent}}}
-    </div>
+    <div id="editor" v-html="inputContent" @input="outputContent"></div>
 </template>
 
 <script>
 import WangEditor from 'wangeditor'
 export default {
-    props: ['inputContent', 'outputContent', 'uploadURL'],
+    props: ['inputContent', 'uploadURL'],
     data() {
-        return {}
+        return {
+            content: ''
+        }
     },
-    computed: {},
-    ready() {
+    computed: {
+
+    },
+    mounted() {
         this.createEditor()
     },
-    attached() {},
     methods: {
         createEditor() {
             const self = this
@@ -32,7 +33,11 @@ export default {
         formatContent(content) {
             // handle
             // ...
-            this.outputContent = content
+            this.content = content
+            this.outputContent()
+        },
+        outputContent() {
+            this.$emit('input', this.content)
         }
     },
     components: {}

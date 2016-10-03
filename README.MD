@@ -1,7 +1,7 @@
 # vue-editor
 
 
-Editor for Vue.js , Base on wangEditor
+Editor for Vue2.0 , Base on wangEditor
 
 #### how to use
 
@@ -10,8 +10,8 @@ template
 
     <v-editor
     :input-content="inputContent"
-    :output-content.sync="outputContent"
-    :upload-url="uploadURL"></v-editor>
+    :upload-url="uploadURL"
+    v-model="outputContent"></v-editor>
 
 
 import

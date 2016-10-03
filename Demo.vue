@@ -1,6 +1,9 @@
 <template lang="html">
     <div class="">
-        <v-editor :input-content="inputContent" :output-content.sync="outputContent" :upload-url="uploadURL"></v-editor>
+        <v-editor
+        :input-content="inputContent"
+        :upload-url="uploadURL"
+        v-model="outputContent"></v-editor>
         <input type="button" name="name" value="submit" @click="submit">
     </div>
 </template>
