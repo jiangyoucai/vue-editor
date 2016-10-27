@@ -2,7 +2,7 @@
     <div class="">
         <v-editor
         :input-content="inputContent"
-        :upload-url="uploadURL"
+        :upload-url="uploadUrl"
         v-model="outputContent"></v-editor>
         <input type="button" name="name" value="submit" @click="submit">
     </div>
@@ -18,7 +18,7 @@ export default {
             // output content from editor
             outputContent: '',
             // set image upload api url
-            uploadURL: '/api/v1/help/upload/wangEditorH5File'
+            uploadUrl: '/api/v1/help/upload/wangEditorH5File'
         }
     },
     computed: {},
