@@ -9,9 +9,9 @@ Editor for Vue2.0 , Base on wangEditor
 template
 
     <v-editor
-    :input-content="inputContent"
-    :upload-url="uploadURL"
-    v-model="outputContent"></v-editor>
+    :content="inputContent"
+    :path="path"
+    v-model="result"></v-editor>
 
 
 import
