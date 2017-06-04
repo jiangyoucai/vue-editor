@@ -21,19 +21,16 @@ import
         data() {
             return {
                 // input content to editor
-                inputContent: 'base on wangeditor',
+                content: 'base on wangeditor',
                 // output content from editor
-                outputContent: '',
+                result: '',
                 // set image upload api url
-                uploadURL: '/api/v1/help/upload/wangEditorH5File'
+                path: '/api/v1/help/upload/wangEditorH5File'
             }
         },
-        computed: {},
-        ready() {},
-        attached() {},
         methods: {
             submit() {
-                console.log(this.outputContent)
+                console.log(this.result)
             }
         },
         components: {
