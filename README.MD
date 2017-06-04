@@ -9,7 +9,7 @@ Editor for Vue2.0 , Base on wangEditor
 template
 
     <v-editor
-    :content="inputContent"
+    :content="content"
     :path="path"
     v-model="result"></v-editor>
 
