@@ -1,7 +1,7 @@
 # vue-editor
 
 
-Editor for Vue2.0 , Base on wangEditor
+Editor for Vue2.0 , Base on wangEditor v3.x
 
 #### how to use
 
