@@ -1,5 +1,6 @@
 <template>
-    <div @input="result" id="editor"></div>
+    <div v-html="content" @input="result" id="editor">
+    </div>
 </template>
 
 <script>
@@ -11,21 +12,30 @@ export default {
             editor: ''
         }
     },
-    watch: {
-        content() {
-            this.editor.txt.html(this.content)
-        }
-    },
     mounted() {
-        const editor = new WangEditor('#editor')
-        editor.customConfig.uploadImgServer = this.path
+        const editor = new WangEditor('editor')
+        editor.config.menus = ['source', '|', 'bold', 'underline', 'italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|', 'quote', 'fontfamily', 'fontsize', 'head', 'unorderlist', 'orderlist', 'alignleft', 'aligncenter', 'alignright',
+            '|', 'link', 'unlink', 'table', 'img', 'video', 'insertcode', '|', 'undo', 'redo', 'fullscreen'
+        ]
+        editor.config.uploadImgUrl = this.path
         editor.create()
         this.editor = editor
     },
     methods: {
         result() {
-            this.$emit('input', this.editor.txt.html())
+            this.$emit('input', this.editor.$txt.html())
         }
     }
 }
 </script>
+<style scoped>
+#editor {
+    height: 440px;
+}
+
+.wangEditor-container {
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid #CCC;
+}
+</style>

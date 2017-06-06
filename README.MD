@@ -1,7 +1,14 @@
 # vue-editor
 
-
 Editor for Vue2.0 , Base on wangEditor
+
+#### notice
+
+    I don't suggest you use wangeditor v3.0 in your production, because it's not very stable, such as the user interface, the upload image and so on.
+
+    choose wangeditor v2.0 first, if you do not want to trouble 
+
+
 
 #### how to use
 
