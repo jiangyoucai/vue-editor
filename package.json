@@ -1,6 +1,6 @@
 {
   "name": "tt-vue-editor",
-  "version": "2.1.24",
+  "version": "2.1.25",
   "description": "a vue componet base on wangEditor",
   "main": "srv/Editor.vue",
   "scripts": {

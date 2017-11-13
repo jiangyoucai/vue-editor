@@ -29,9 +29,9 @@ template
     v-model="result"></v-editor>
 
 
-javascript
+script
 
-    import Editor from './Editor'
+    import Editor from 'tt-vue-editor'
     export default {
         data() {
             return {
