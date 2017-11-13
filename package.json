@@ -1,0 +1,24 @@
+{
+  "name": "tt-vue-editor",
+  "version": "2.1.23",
+  "description": "a vue componet base on wangEditor",
+  "main": "srv/Editor.vue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangyoucai/vue-editor.git"
+  },
+  "keywords": [
+    "vue-editor",
+    "editor",
+    "wangeditor"
+  ],
+  "author": "https://github.com/jiangyoucai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiangyoucai/vue-editor/issues"
+  },
+  "homepage": "https://github.com/jiangyoucai/vue-editor#readme"
+}

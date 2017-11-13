@@ -8,7 +8,15 @@ Editor for Vue2.0 , Base on wangEditor v2.x
     because it's not very stable, such as the user interface, the upload image and so on.
     choose wangeditor v2.0 first, if you do not want to trouble 
 
+#### install 
 
+npm 
+
+    npm install tt-vue-editor
+
+yarn
+
+    yarn add tt-vue-editor
 
 #### how to use
 
@@ -21,7 +29,7 @@ template
     v-model="result"></v-editor>
 
 
-import
+javascript
 
     import Editor from './Editor'
     export default {
