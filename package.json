@@ -1,8 +1,8 @@
 {
   "name": "tt-vue-editor",
-  "version": "2.1.25",
+  "version": "2.1.26",
   "description": "a vue componet base on wangEditor",
-  "main": "srv/Editor.vue",
+  "main": "./src/Editor.vue",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
